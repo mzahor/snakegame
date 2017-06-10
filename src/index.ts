@@ -25,6 +25,4 @@ function init() {
   engine.start();
 }
 
-console.log('hello');
-
 init();
