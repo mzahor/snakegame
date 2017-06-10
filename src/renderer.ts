@@ -1,6 +1,16 @@
 import { HEAD, BODY, FOOD, EMPTY } from './constants';
 
 export default class Renderer {
+  private CELL_CLASS_NAME;
+  private ROW_CLASS_NAME;
+  private TYPES;
+  private container_;
+  private table_;
+  private tbody_;
+  private highScore_;
+  private score_;
+  private scoreContainer_;
+
   constructor(sizes) {
     this.CELL_CLASS_NAME = 'pg-cell';
     this.ROW_CLASS_NAME = 'pg-row';
@@ -73,7 +83,8 @@ export default class Renderer {
     row.className = this.ROW_CLASS_NAME;
     return row;
   }
-  _createCell(row, type) {
+
+  _createCell(row) {
     let cell = row.insertCell(-1);
     cell.className = this.CELL_CLASS_NAME;
   }

@@ -1,6 +1,8 @@
 export default class Snake {
+  public snake;
+
   constructor(position) {
-    this.snake = [Object.assign({}, position)];
+    this.snake = [{ ...position }];
   }
 
   move(dx, dy) {
@@ -37,7 +39,7 @@ export default class Snake {
   }
 
   _stepAhead(dx, dy) {
-    let head = Object.assign({}, this.snake[0]);
+    let head = { ...this.snake[0] };
     head.x += dx;
     head.y += dy;
     this.snake.unshift(head);

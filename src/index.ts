@@ -1,6 +1,6 @@
 import Controller from './controller';
 import Engine from './engine';
-import Rendered from './renderer';
+import Renderer from './renderer';
 
 function init() {
   const settings = {

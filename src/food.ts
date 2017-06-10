@@ -1,4 +1,7 @@
-class Food {
+export default class Food {
+  private position;
+  private settings;
+
   constructor(settings) {
     this.position = {};
     this.settings = settings;

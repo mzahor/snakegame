@@ -17,9 +17,8 @@
   },
   "homepage": "https://github.com/mzahor/snakegame#readme",
   "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.5.2",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
     "webpack": "^2.6.1"
   }
 }

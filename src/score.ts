@@ -1,4 +1,9 @@
 export default class Score {
+  private hits;
+  private highScore;
+  private scoreValue;
+  private score;
+
   constructor() {
     this.hits = 0;
     this.highScore = 0;

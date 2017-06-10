@@ -4,13 +4,27 @@ import Snake from './snake';
 import Food from './food';
 
 export default class Engine {
+  private settings;
+  private score;
+  private snake;
+  private food;
+  private playground;
+  private dx;
+  private dy;
+  private _state;
+  private state;
+  private gameState;
+  private _interval;
+  private ctrl;
+  private tickCb;
+
   constructor(settings) {
     this.settings = settings;
     this.score = new Score();
     this.snake = new Snake({x: 0, y: 0});
     this.food = new Food(settings);
     this.food.placeFood(this.snake.snake);
-    this.playground = this._generatePlayground(settings.size);
+    this.playground = this._generatePlayground();
     this.dx = 1;
     this.dy = 0;
 

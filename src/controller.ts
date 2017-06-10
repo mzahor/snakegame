@@ -1,22 +1,26 @@
 export default class Controller {
+  private upCb;
+  private downCb;
+  private leftCb;
+  private rightCb;
+
   constructor() {
   }
 
   init() {
-    const self = this;
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', (event) => {
       switch (event.code) {
         case 'ArrowUp':
-          self.upCb();
+          this.upCb();
           break;
         case 'ArrowDown':
-          self.downCb();
+          this.downCb();
           break;
         case 'ArrowLeft':
-          self.leftCb();
+          this.leftCb();
           break;
         case 'ArrowRight':
-          self.rightCb();
+          this.rightCb();
           break;
       }
     });
