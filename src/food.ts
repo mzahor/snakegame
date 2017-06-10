@@ -1,10 +1,8 @@
 export default class Food {
-  private position;
-  private settings;
+  public position;
 
-  constructor(settings) {
+  constructor(private settings) {
     this.position = {};
-    this.settings = settings;
   }
 
   isHere(x, y) {

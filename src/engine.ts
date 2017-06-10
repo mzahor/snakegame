@@ -19,10 +19,9 @@ export interface Settings {
 }
 
 export default class Engine {
-  private settings;
   private score;
-  private snake;
-  private food;
+  private snake: Snake;
+  private food: Food;
   private playground;
   private dx;
   private dy;
@@ -33,8 +32,7 @@ export default class Engine {
   private ctrl;
   private tickCb;
 
-  constructor(settings: Settings) {
-    this.settings = settings;
+  constructor(private settings: Settings) {
     this.score = new Score();
     this.snake = new Snake({x: 0, y: 0});
     this.food = new Food(settings);
@@ -107,9 +105,10 @@ export default class Engine {
       this.score.reset();
       this.gameState.state.game = 'over';
       clearInterval(this._interval);
+    } else {
+      this.gameState.playground = this.generatePlayground();
     }
 
-    this.gameState.playground = this.generatePlayground();
     this.gameState.state.score = this.score.getScore();
     this.tickCb(this.gameState);
   }
@@ -122,7 +121,7 @@ export default class Engine {
     const head = this.snake.getHead();
     const size = this.settings.size;
 
-    return head.x < 0 || head.y < 0 || head.x > size.x || head.y > size.y;
+    return head.x < 0 || head.y < 0 || head.x > size.width || head.y > size.height;
   }
 
   private generatePlayground() {
