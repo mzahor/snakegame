@@ -3,6 +3,21 @@ import Score from './score';
 import Snake from './snake';
 import Food from './food';
 
+export interface Point {
+  x: number,
+  y: number
+}
+
+export interface Size {
+  width: number,
+  height: number
+}
+
+export interface Settings {
+  speed: number,
+  size: Size
+}
+
 export default class Engine {
   private settings;
   private score;
@@ -18,13 +33,13 @@ export default class Engine {
   private ctrl;
   private tickCb;
 
-  constructor(settings) {
+  constructor(settings: Settings) {
     this.settings = settings;
     this.score = new Score();
     this.snake = new Snake({x: 0, y: 0});
     this.food = new Food(settings);
     this.food.placeFood(this.snake.snake);
-    this.playground = this._generatePlayground();
+    this.playground = this.generatePlayground();
     this.dx = 1;
     this.dy = 0;
 
@@ -38,46 +53,46 @@ export default class Engine {
     }
   }
 
-  setController(ctrl) {
+  public setController(ctrl) {
     this.ctrl = ctrl;
-    this.ctrl.onLeft(this._left.bind(this));
-    this.ctrl.onRight(this._right.bind(this));
-    this.ctrl.onUp(this._up.bind(this));
-    this.ctrl.onDown(this._down.bind(this));
+    this.ctrl.onLeft(this.left.bind(this));
+    this.ctrl.onRight(this.right.bind(this));
+    this.ctrl.onUp(this.up.bind(this));
+    this.ctrl.onDown(this.down.bind(this));
     this.ctrl.init();
   }
 
-  start() {
+  public start() {
     if (this.state !== 'started') {
-      this._interval = setInterval(this._tick.bind(this), this.settings.speed);
+      this._interval = setInterval(this.tick.bind(this), this.settings.speed);
     }
   }
 
-  _left() {
+  public onTick(cb) {
+    this.tickCb = cb;
+  }
+
+  private left() {
     this.dx = -1;
     this.dy = 0;
   }
 
-  _right() {
+  private right() {
     this.dx = 1;
     this.dy = 0;
   }
 
-  _up() {
+  private up() {
     this.dy = -1;
     this.dx = 0;
   }
 
-  _down() {
+  private down() {
     this.dy = 1;
     this.dx = 0;
   }
 
-  onTick(cb) {
-    this.tickCb = cb;
-  }
-
-  _tick() {
+  private tick() {
     const self = this;
 
     if (this.snake.isHeadHere(this.food.position.x, this.food.position.y)) {
@@ -88,29 +103,29 @@ export default class Engine {
       this.snake.move(this.dx, this.dy);
     }
 
-    if (this._isGameOver()) {
+    if (this.isGameOver()) {
       this.score.reset();
       this.gameState.state.game = 'over';
       clearInterval(this._interval);
     }
 
-    this.gameState.playground = this._generatePlayground();
+    this.gameState.playground = this.generatePlayground();
     this.gameState.state.score = this.score.getScore();
     this.tickCb(this.gameState);
   }
 
-  _isGameOver() {
-    return this.snake.hasEatenItself() || this._isOutOfBounds();
+  private isGameOver() {
+    return this.snake.hasEatenItself() || this.isOutOfBounds();
   }
 
-  _isOutOfBounds() {
+  private isOutOfBounds() {
     const head = this.snake.getHead();
     const size = this.settings.size;
 
     return head.x < 0 || head.y < 0 || head.x > size.x || head.y > size.y;
   }
 
-  _generatePlayground() {
+  private generatePlayground() {
     let size = this.settings.size;
     let playground = Array(size.height);
 

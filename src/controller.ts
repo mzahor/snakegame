@@ -7,7 +7,7 @@ export default class Controller {
   constructor() {
   }
 
-  init() {
+  public init() {
     document.addEventListener('keydown', (event) => {
       switch (event.code) {
         case 'ArrowUp':
@@ -26,19 +26,19 @@ export default class Controller {
     });
   }
 
-  onLeft(cb) {
+  public onLeft(cb) {
     this.leftCb = cb;
   }
 
-  onRight(cb) {
+  public onRight(cb) {
     this.rightCb = cb;
   }
 
-  onUp(cb) {
+  public onUp(cb) {
     this.upCb = cb;
   }
 
-  onDown(cb) {
+  public onDown(cb) {
     this.downCb = cb;
   }
 }
