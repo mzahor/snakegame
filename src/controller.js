@@ -1,7 +1,7 @@
-class Controller {
+export default class Controller {
   constructor() {
   }
-  
+
   init() {
     const self = this;
     document.addEventListener('keydown', function(event) {
@@ -25,15 +25,15 @@ class Controller {
   onLeft(cb) {
     this.leftCb = cb;
   }
-  
+
   onRight(cb) {
     this.rightCb = cb;
   }
-  
+
   onUp(cb) {
     this.upCb = cb;
   }
-  
+
   onDown(cb) {
     this.downCb = cb;
   }

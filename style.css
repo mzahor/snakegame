@@ -1,15 +1,8 @@
-/* Styles go here */
-
 .playground {
   border: 1px solid #1b9e3d;
   table-layout: fixed;
   border-spacing: 0
 }
-
-.playground .pg-row {
-  
-}
-
 
 .playground .pg-cell {
   background-color: #afa;
@@ -28,9 +21,11 @@
 .playground .pg-cell.body {
   background-color: #000;
 }
+
 .playground .pg-cell.head {
   background-color: blue;
 }
+
 .playground .pg-cell.food {
   background-color: red;
 }

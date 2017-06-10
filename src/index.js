@@ -1,4 +1,7 @@
-// Code goes here
+import Controller from './controller';
+import Engine from './engine';
+import Rendered from './renderer';
+
 function init() {
   const settings = {
     size: {
@@ -7,12 +10,12 @@ function init() {
     },
     speed: 200
   };
-  
+
   let controller = new Controller();
   let engine = new Engine(settings);
-  
+
   engine.setController(controller);
-  
+
   let renderer = new Renderer(settings.size);
 
   engine.onTick(function(state) {
@@ -22,4 +25,6 @@ function init() {
   engine.start();
 }
 
-setTimeout(init, 1e3);
+console.log('hello');
+
+init();
