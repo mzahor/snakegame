@@ -1,9 +1,9 @@
-let utils = {
+const utils = {
   iterate: (list, cb) => {
-    for (let i = 0; i < list.length; i++) {
-      cb(list[i]);
+    for (const item of list) {
+      cb(item);
     }
-  }
-}
+  },
+};
 
 export default utils;

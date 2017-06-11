@@ -1,4 +1,4 @@
-import { Point } from './interfaces';
+import { Point } from "./interfaces";
 
 export default class Snake {
   public snake: Point[];
@@ -7,21 +7,21 @@ export default class Snake {
     this.snake = [{ ...position }];
   }
 
-  public move(dx, dy) {
+  public move(dx: number, dy: number): void {
     this.stepAhead(dx, dy);
     this.snake.pop();
   }
 
-  public eat(dx, dy) {
+  public eat(dx: number, dy: number) {
     this.stepAhead(dx, dy);
   }
 
-  public isHeadHere(x, y) {
-    let head = this.snake[0];
+  public isHeadHere(x: number, y: number): boolean {
+    const head = this.getHead();
     return head.x === x && head.y === y;
   }
 
-  public isBodyHere(x, y) {
+  public isBodyHere(x, y): boolean {
     for (let i = 1; i < this.snake.length; i++) {
       if (this.snake[i].x === x && this.snake[i].y === y) {
         return true;
@@ -31,17 +31,17 @@ export default class Snake {
     return false;
   }
 
-  public getHead() {
+  public getHead(): Point {
     return this.snake[0];
   }
 
-  public hasEatenItself() {
+  public hasEatenItself(): boolean {
     const head = this.getHead();
     return this.isBodyHere(head.x, head.y);
   }
 
-  private stepAhead(dx, dy) {
-    let head = { ...this.snake[0] };
+  private stepAhead(dx: number, dy: number): void {
+    const head = { ...this.snake[0] };
 
     head.x += dx;
     head.y += dy;

@@ -4,22 +4,19 @@ export default class Controller {
   private leftCb;
   private rightCb;
 
-  constructor() {
-  }
-
   public init() {
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener("keydown", (event) => {
       switch (event.code) {
-        case 'ArrowUp':
+        case "ArrowUp":
           this.upCb();
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           this.downCb();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           this.leftCb();
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           this.rightCb();
           break;
       }

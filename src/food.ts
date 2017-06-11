@@ -1,3 +1,5 @@
+import { Point } from "./interfaces";
+
 export default class Food {
   public position;
 
@@ -5,12 +7,12 @@ export default class Food {
     this.position = {};
   }
 
-  isHere(x, y) {
+  public isHere(x: number, y: number) {
     return this.position.x === x && this.position.y === y;
   }
 
-  placeFood(snake) {
-    let coords = this._getRandomCords();
+  public placeFood(snake: Point[]) {
+    const coords = this._getRandomCords();
     if (snake.some((part) => part.x === coords.x && part.y === coords.y)) {
       this.placeFood(snake);
     } else {
@@ -18,10 +20,10 @@ export default class Food {
     }
   }
 
-  _getRandomCords() {
+  private _getRandomCords() {
     return {
       x: Math.floor((Math.random() * this.settings.size.width - 1)),
-      y: Math.floor((Math.random() * this.settings.size.height - 1))
-    }
+      y: Math.floor((Math.random() * this.settings.size.height - 1)),
+    };
   }
 }

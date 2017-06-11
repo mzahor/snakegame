@@ -1,24 +1,25 @@
-import Controller from './controller';
-import Engine from './engine';
-import Renderer from './renderer';
+import Controller from "./controller";
+import Engine from "./engine";
+import { Settings } from "./interfaces";
+import Renderer from "./renderer";
 
 function init() {
-  const settings = {
+  const settings: Settings = {
     size: {
+      height: 10,
       width: 10,
-      height: 10
     },
-    speed: 200
+    speed: 200,
   };
 
-  let controller = new Controller();
-  let engine = new Engine(settings);
+  const controller = new Controller();
+  const engine = new Engine(settings);
 
   engine.setController(controller);
 
-  let renderer = new Renderer(settings.size);
+  const renderer = new Renderer(settings.size);
 
-  engine.onTick(function(state) {
+  engine.onTick((state) => {
     renderer.render(state);
   });
 

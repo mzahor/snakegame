@@ -1,8 +1,8 @@
-import { HEAD, BODY, FOOD, EMPTY } from './constants';
-import { Settings } from './interfaces';
-import Score from './score';
-import Snake from './snake';
-import Food from './food';
+import { BODY, EMPTY, FOOD, HEAD } from "./constants";
+import Food from "./food";
+import { Settings } from "./interfaces";
+import Score from "./score";
+import Snake from "./snake";
 
 export default class Engine {
   private score: Score;
@@ -11,12 +11,11 @@ export default class Engine {
   private playground;
   private dx;
   private dy;
-  private _state;
   private state;
   private gameState;
-  private _interval;
+  private interval;
   private ctrl;
-  private tickCb: Function;
+  private tickCb: (fn: () => void) => void;
 
   constructor(private settings: Settings) {
     this.score = new Score();
@@ -27,14 +26,12 @@ export default class Engine {
     this.dx = 1;
     this.dy = 0;
 
-    this._state = '';
-
     this.gameState = {
+      playground: this.playground,
       state: {
-        game: 'notStarted'
+        game: "notStarted",
       },
-      playground: this.playground
-    }
+    };
   }
 
   public setController(ctrl) {
@@ -47,8 +44,8 @@ export default class Engine {
   }
 
   public start() {
-    if (this.state !== 'started') {
-      this._interval = setInterval(this.tick.bind(this), this.settings.speed);
+    if (this.state !== "started") {
+      this.interval = setInterval(this.tick.bind(this), this.settings.speed);
     }
   }
 
@@ -89,8 +86,8 @@ export default class Engine {
 
     if (this.isGameOver()) {
       this.score.reset();
-      this.gameState.state.game = 'over';
-      clearInterval(this._interval);
+      this.gameState.state.game = "over";
+      clearInterval(this.interval);
     } else {
       this.gameState.playground = this.generatePlayground();
     }
@@ -99,11 +96,11 @@ export default class Engine {
     this.tickCb(this.gameState);
   }
 
-  private isGameOver() {
+  private isGameOver(): boolean {
     return this.snake.hasEatenItself() || this.isOutOfBounds();
   }
 
-  private isOutOfBounds() {
+  private isOutOfBounds(): boolean {
     const head = this.snake.getHead();
     const size = this.settings.size;
 
@@ -112,10 +109,10 @@ export default class Engine {
 
   private generatePlayground(): number[][] {
     const size = this.settings.size;
-    let playground = Array(size.height);
+    const playground = Array(size.height);
 
     for (let y = 0; y < size.height; y++) {
-      let row = Array(size.width);
+      const row = Array(size.width);
 
       for (let x = 0; x < size.width; x++) {
         if (this.snake.isHeadHere(x, y)) {
@@ -135,4 +132,3 @@ export default class Engine {
     return playground;
   }
 }
-

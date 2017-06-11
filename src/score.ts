@@ -1,8 +1,8 @@
 export default class Score {
-  private hits;
-  private highScore;
-  private scoreValue;
-  private score;
+  private hits: number;
+  private highScore: number;
+  private scoreValue: number;
+  private score: number;
 
   constructor() {
     this.hits = 0;
@@ -10,18 +10,18 @@ export default class Score {
     this.scoreValue = 100;
   }
 
-  hit() {
+  public hit() {
     this.hits++;
   }
 
-  getScore() {
+  public getScore() {
     return {
+      highScore: Math.max(this.highScore, this.score),
       score: this.hits * this.scoreValue,
-      highScore: Math.max(this.highScore, this.score)
     };
   }
 
-  reset() {
+  public reset() {
     this.highScore = Math.max(this.highScore, this.score);
   }
 }
