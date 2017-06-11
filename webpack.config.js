@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
     context: __dirname,
-    devtool: debug ? 'inline-sourcemap' : null,
+    devtool: debug ? 'inline-source-map' : null,
     entry: './src/index.ts',
     output: {
         path: __dirname + '/dist',

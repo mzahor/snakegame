@@ -108,7 +108,7 @@ export default class Engine {
     const head = this.snake.getHead();
     const size = this.settings.size;
 
-    return head.x < 0 || head.y < 0 || head.x > size.width || head.y > size.height;
+    return head.x < 0 || head.y < 0 || head.x >= size.width || head.y >= size.height;
   }
 
   private generatePlayground(): number[][] {
