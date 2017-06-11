@@ -1,4 +1,4 @@
-import { IPoint } from "./interfaces";
+import { IPoint, ISize } from "./interfaces";
 
 export default class Snake {
   public snake: IPoint[];
@@ -38,6 +38,17 @@ export default class Snake {
   public hasEatenItself(): boolean {
     const head = this.getHead();
     return this.isBodyHere(head.x, head.y);
+  }
+
+  public isOutOfBounds(size: ISize): boolean {
+    const head = this.getHead();
+
+    return (
+      head.x < 0 ||
+      head.y < 0 ||
+      head.x >= size.width ||
+      head.y >= size.height
+    );
   }
 
   private stepAhead(dx: number, dy: number): void {

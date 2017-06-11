@@ -22,7 +22,7 @@ export default class Engine {
   private tickCb: (state: IGameState) => void;
 
   constructor(private settings: ISettings) {
-    this.snake = new Snake({x: 0, y: 0});
+    this.snake = new Snake({ x: 0, y: 0 });
     this.food = new Food(settings);
     this.food.placeFood(this.snake.snake);
     this.playground = this.generatePlayground();
@@ -101,14 +101,10 @@ export default class Engine {
   }
 
   private isGameOver(): boolean {
-    return this.snake.hasEatenItself() || this.isOutOfBounds();
-  }
-
-  private isOutOfBounds(): boolean {
-    const head = this.snake.getHead();
-    const size = this.settings.size;
-
-    return head.x < 0 || head.y < 0 || head.x >= size.width || head.y >= size.height;
+    return (
+      this.snake.hasEatenItself() ||
+      this.snake.isOutOfBounds(this.settings.size)
+    );
   }
 
   private generatePlayground(): number[][] {
