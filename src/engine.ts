@@ -1,25 +1,11 @@
 import { HEAD, BODY, FOOD, EMPTY } from './constants';
+import { Settings } from './interfaces';
 import Score from './score';
 import Snake from './snake';
 import Food from './food';
 
-export interface Point {
-  x: number,
-  y: number
-}
-
-export interface Size {
-  width: number,
-  height: number
-}
-
-export interface Settings {
-  speed: number,
-  size: Size
-}
-
 export default class Engine {
-  private score;
+  private score: Score;
   private snake: Snake;
   private food: Food;
   private playground;
@@ -30,7 +16,7 @@ export default class Engine {
   private gameState;
   private _interval;
   private ctrl;
-  private tickCb;
+  private tickCb: Function;
 
   constructor(private settings: Settings) {
     this.score = new Score();
@@ -41,7 +27,7 @@ export default class Engine {
     this.dx = 1;
     this.dy = 0;
 
-    this._state = ''
+    this._state = '';
 
     this.gameState = {
       state: {
@@ -124,8 +110,8 @@ export default class Engine {
     return head.x < 0 || head.y < 0 || head.x > size.width || head.y > size.height;
   }
 
-  private generatePlayground() {
-    let size = this.settings.size;
+  private generatePlayground(): number[][] {
+    const size = this.settings.size;
     let playground = Array(size.height);
 
     for (let y = 0; y < size.height; y++) {
