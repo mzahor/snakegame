@@ -26,6 +26,7 @@ export default class Engine {
     this.food = new Food(settings);
     this.food.placeFood(this.snake.snake);
     this.playground = this.generatePlayground();
+    this.scorer = new Scorer();
     this.dx = 1;
     this.dy = 0;
 
@@ -36,7 +37,7 @@ export default class Engine {
     };
   }
 
-  public setController(ctrl) {
+  public setController(ctrl: IController) {
     this.ctrl = ctrl;
     this.ctrl.onLeft(this.left.bind(this));
     this.ctrl.onRight(this.right.bind(this));
