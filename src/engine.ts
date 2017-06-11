@@ -5,7 +5,7 @@ import Snake from "./snake";
 
 export interface IGameState {
   playground: number[][];
-  state: string;
+  state: "notStarted" | "started" | "over";
   score: IScore;
 }
 
@@ -17,7 +17,7 @@ export default class Engine {
   private dx: number;
   private dy: number;
   private gameState: IGameState;
-  private interval: number;
+  private tickHandle: number;
   private ctrl: IController;
   private tickCb: (state: IGameState) => void;
 
@@ -48,7 +48,7 @@ export default class Engine {
 
   public start() {
     if (this.gameState.state !== "started") {
-      this.interval = setInterval(this.tick.bind(this), this.settings.speed);
+      this.tickHandle = setInterval(this.tick.bind(this), this.settings.speed);
     }
   }
 
@@ -90,7 +90,7 @@ export default class Engine {
     if (this.isGameOver()) {
       this.scorer.reset();
       this.gameState.state = "over";
-      clearInterval(this.interval);
+      clearInterval(this.tickHandle);
     } else {
       this.gameState.playground = this.generatePlayground();
     }
