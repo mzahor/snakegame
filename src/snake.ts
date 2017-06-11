@@ -1,9 +1,9 @@
-import { Point } from "./interfaces";
+import { IPoint } from "./interfaces";
 
 export default class Snake {
-  public snake: Point[];
+  public snake: IPoint[];
 
-  constructor(position: Point) {
+  constructor(position: IPoint) {
     this.snake = [{ ...position }];
   }
 
@@ -31,7 +31,7 @@ export default class Snake {
     return false;
   }
 
-  public getHead(): Point {
+  public getHead(): IPoint {
     return this.snake[0];
   }
 

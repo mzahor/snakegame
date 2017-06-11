@@ -1,4 +1,4 @@
-import { Point } from "./interfaces";
+import { IPoint } from "./interfaces";
 
 export default class Food {
   public position;
@@ -11,7 +11,7 @@ export default class Food {
     return this.position.x === x && this.position.y === y;
   }
 
-  public placeFood(snake: Point[]) {
+  public placeFood(snake: IPoint[]) {
     const coords = this._getRandomCords();
     if (snake.some((part) => part.x === coords.x && part.y === coords.y)) {
       this.placeFood(snake);

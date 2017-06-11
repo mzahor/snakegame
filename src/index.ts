@@ -1,10 +1,10 @@
 import Controller from "./controller";
 import Engine from "./engine";
-import { Settings } from "./interfaces";
+import { ISettings } from "./interfaces";
 import Renderer from "./renderer";
 
 function init() {
-  const settings: Settings = {
+  const settings: ISettings = {
     size: {
       height: 10,
       width: 10,

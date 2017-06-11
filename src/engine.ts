@@ -1,6 +1,5 @@
-import { BODY, EMPTY, FOOD, HEAD } from "./constants";
 import Food from "./food";
-import { Settings } from "./interfaces";
+import { CellType, ISettings } from "./interfaces";
 import Score from "./score";
 import Snake from "./snake";
 
@@ -17,7 +16,7 @@ export default class Engine {
   private ctrl;
   private tickCb: (fn: () => void) => void;
 
-  constructor(private settings: Settings) {
+  constructor(private settings: ISettings) {
     this.score = new Score();
     this.snake = new Snake({x: 0, y: 0});
     this.food = new Food(settings);
@@ -116,13 +115,13 @@ export default class Engine {
 
       for (let x = 0; x < size.width; x++) {
         if (this.snake.isHeadHere(x, y)) {
-          row[x] = HEAD;
+          row[x] = CellType.Head;
         } else if (this.snake.isBodyHere(x, y)) {
-          row[x] = BODY;
+          row[x] = CellType.Body;
         } else if (this.food.isHere(x, y)) {
-          row[x] = FOOD;
+          row[x] = CellType.Food;
         } else {
-          row[x] = EMPTY;
+          row[x] = CellType.Empty;
         }
       }
 

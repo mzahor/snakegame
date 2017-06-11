@@ -1,14 +1,21 @@
-export interface Point {
-  x: number,
-  y: number
+export interface IPoint {
+  x: number;
+  y: number;
 }
 
-export interface Size {
-  width: number,
-  height: number
+export interface ISize {
+  width: number;
+  height: number;
 }
 
-export interface Settings {
-  speed: number,
-  size: Size
+export interface ISettings {
+  speed: number;
+  size: ISize;
+}
+
+export enum CellType {
+    Head = 0,
+    Body,
+    Food,
+    Empty,
 }
