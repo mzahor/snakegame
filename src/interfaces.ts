@@ -18,12 +18,22 @@ export interface IScore {
   score: number;
 }
 
+export interface IGameState {
+  playground: number[][];
+  state: "notStarted" | "started" | "over";
+  score: IScore;
+}
+
 export interface IController {
   onLeft: (cb: () => void) => void;
   onRight: (cb: () => void) => void;
   onUp: (cb: () => void) => void;
   onDown: (cb: () => void) => void;
   init();
+}
+
+export interface IRenderer {
+  render(gameState: IGameState);
 }
 
 export enum CellType {

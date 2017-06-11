@@ -1,7 +1,7 @@
-import { IGameState } from "./engine";
-import { CellType, IScore } from "./interfaces";
+import { IGameState } from "./interfaces";
+import { CellType, IRenderer, IScore } from "./interfaces";
 
-export default class Renderer {
+export default class Renderer implements IRenderer {
   private static readonly CELL_CLASS_NAME = "pg-cell";
   private static readonly ROW_CLASS_NAME = "pg-row";
   private static readonly TYPES = {

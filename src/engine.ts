@@ -1,13 +1,13 @@
 import Food from "./food";
-import { CellType, IController, IScore, ISettings } from "./interfaces";
+import {
+  CellType,
+  IController,
+  IGameState,
+  IScore,
+  ISettings,
+} from "./interfaces";
 import Scorer from "./scorer";
 import Snake from "./snake";
-
-export interface IGameState {
-  playground: number[][];
-  state: "notStarted" | "started" | "over";
-  score: IScore;
-}
 
 export default class Engine {
   private scorer: Scorer;
