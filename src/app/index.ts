@@ -1,29 +1,4 @@
-import Controller from "./controller";
-import Engine from "./engine";
-import { ISettings } from "./interfaces";
-import Renderer from "./renderer";
+import SnakeGame from "./snakeGame";
 
-function init() {
-  const settings: ISettings = {
-    size: {
-      height: 10,
-      width: 10,
-    },
-    speed: 200,
-  };
-
-  const controller = new Controller();
-  const engine = new Engine(settings);
-
-  engine.setController(controller);
-
-  const renderer = new Renderer(settings.size);
-
-  engine.onTick((state) => {
-    renderer.render(state);
-  });
-
-  engine.start();
-}
-
-init();
+const game = new SnakeGame();
+game.start();

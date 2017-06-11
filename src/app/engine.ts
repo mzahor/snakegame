@@ -3,6 +3,7 @@ import {
   CellType,
   IController,
   IGameState,
+  IRenderer,
   IScore,
   ISettings,
 } from "./interfaces";
@@ -10,6 +11,7 @@ import Scorer from "./scorer";
 import Snake from "./snake";
 
 export default class Engine {
+  private renderer: IRenderer;
   private scorer: Scorer;
   private snake: Snake;
   private food: Food;
@@ -46,14 +48,14 @@ export default class Engine {
     this.ctrl.init();
   }
 
+  public setRenderer(renderer: IRenderer) {
+    this.renderer = renderer;
+  }
+
   public start() {
     if (this.gameState.state !== "started") {
       this.tickHandle = setInterval(this.tick.bind(this), this.settings.speed);
     }
-  }
-
-  public onTick(cb) {
-    this.tickCb = cb;
   }
 
   private left() {
@@ -97,7 +99,7 @@ export default class Engine {
 
     this.gameState.score = this.scorer.getScore();
 
-    this.tickCb(this.gameState);
+    this.renderer.render(this.gameState);
   }
 
   private isGameOver(): boolean {
