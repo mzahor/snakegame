@@ -27,7 +27,7 @@ export default class Engine {
     this.food.placeFood(this.snake.snake);
     this.playground = this.generatePlayground();
     this.scorer = new Scorer();
-    this.dx = 1;
+    this.dx = 0;
     this.dy = 0;
 
     this.gameState = {

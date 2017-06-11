@@ -1,5 +1,6 @@
 import { IGameState } from "./interfaces";
 import { CellType, IRenderer, IScore } from "./interfaces";
+import "./renderer.css";
 
 export default class Renderer implements IRenderer {
   private static readonly CELL_CLASS_NAME = "pg-cell";
