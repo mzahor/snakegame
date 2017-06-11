@@ -4,17 +4,15 @@ describe("Snake", () => {
     let snake: Snake;
 
     beforeEach(() => {
-        snake = new Snake({
-            x: 10,
-            y: 10,
-        });
+        snake = new Snake(
+            { x: 10, y: 10 },
+        );
     });
 
     it("create a snake with a head", () => {
-        expect(snake.getHead()).toEqual(jasmine.objectContaining({
-            x: 10,
-            y: 10,
-        }));
+        expect(snake.getHead()).toEqual(jasmine.objectContaining(
+            { x: 10, y: 10 },
+        ));
     });
 
     describe("#isHeadHere", () => {
@@ -36,37 +34,71 @@ describe("Snake", () => {
         it("should move down", () => {
             snake.move(0, 1);
 
-            expect(snake.snake).toEqual([{
-                x: 10,
-                y: 11,
-            }]);
+            expect(snake.snake).toEqual([
+                { x: 10, y: 11 },
+            ]);
         });
 
         it("should move up", () => {
             snake.move(0, -1);
 
-            expect(snake.snake).toEqual([{
-                x: 10,
-                y: 9,
-            }]);
+            expect(snake.snake).toEqual([
+                { x: 10, y: 9 },
+            ]);
         });
 
         it("should move left", () => {
             snake.move(-1, 0);
 
-            expect(snake.snake).toEqual([{
-                x: 9,
-                y: 10,
-            }]);
+            expect(snake.snake).toEqual([
+                { x: 9, y: 10 },
+            ]);
         });
 
         it("should move right", () => {
             snake.move(1, 0);
 
-            expect(snake.snake).toEqual([{
-                x: 11,
-                y: 10,
-            }]);
+            expect(snake.snake).toEqual([
+                { x: 11, y: 10 },
+            ]);
+        });
+    });
+
+    describe("#eat", () => {
+        it("should eat down", () => {
+            snake.eat(0, 1);
+
+            expect(snake.snake).toEqual([
+                { x: 10, y: 11 },
+                { x: 10, y: 10 },
+            ]);
+        });
+
+        it("should eat up", () => {
+            snake.eat(0, -1);
+
+            expect(snake.snake).toEqual([
+                { x: 10, y: 9 },
+                { x: 10, y: 10 },
+            ]);
+        });
+
+        it("should eat left", () => {
+            snake.eat(-1, 0);
+
+            expect(snake.snake).toEqual([
+                { x: 9, y: 10 },
+                { x: 10, y: 10 },
+            ]);
+        });
+
+        it("should eat right", () => {
+            snake.eat(1, 0);
+
+            expect(snake.snake).toEqual([
+                { x: 11, y: 10 },
+                { x: 10, y: 10 },
+            ]);
         });
     });
 });
