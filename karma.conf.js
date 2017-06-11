@@ -1,8 +1,21 @@
 const webpackConfig = require('./webpack.config.js');
+const isTravis = !!process.env.TRAVIS;
+
+const preprocessors = ['webpack', 'sourcemap'];
+const reporters = ['progress'];
+let browsers = ['Chrome'];
+let autoWatch = true;
+
+if (isTravis) {
+  preprocessors.push('coverage');
+  reporters.push('coverage');
+  browsers = ['PhantomJS'];
+  autoWatch = false;
+}
 
 module.exports = function (config) {
   config.set({
-    basePath: 'src/app',
+    basePath: '',
     webpack: {
       context: __dirname,
       resolve: {
@@ -28,16 +41,16 @@ module.exports = function (config) {
     exclude: [
     ],
     preprocessors: {
-      '**/*.spec.ts': ['webpack', 'sourcemap'],
+      '**/*.spec.ts': preprocessors,
     },
     mime: { 'text/x-typescript': ['ts', 'tsx'] },
-    reporters: ['progress'],
+    reporters: reporters,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
-    browsers: ['Chrome'],
-    singleRun: false,
+    autoWatch: autoWatch,
+    browsers: browsers,
+    singleRun: !autoWatch,
     concurrency: Infinity,
   })
 }

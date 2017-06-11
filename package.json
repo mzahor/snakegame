@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "karma start",
     "watch": "webpack --progress --watch",
     "build": "rm -rf dist/* && webpack",
     "dev": "webpack-dev-server --open",
@@ -28,7 +28,9 @@
     "jasmine-core": "^2.6.3",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
+    "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
     "serve": "^5.2.2",
