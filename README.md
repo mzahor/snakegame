@@ -1,6 +1,6 @@
 Snake game
 ==========
-
+[](https://travis-ci.org/#)
 Created with my friend just for fun.
 Currently I use it to try TypeScript in action.
 
