@@ -1,4 +1,6 @@
-export default class Score {
+import { IScore } from "./interfaces";
+
+export default class Scorer {
   private hits: number;
   private highScore: number;
   private scoreValue: number;
@@ -14,7 +16,7 @@ export default class Score {
     this.hits++;
   }
 
-  public getScore() {
+  public getScore(): IScore {
     return {
       highScore: Math.max(this.highScore, this.score),
       score: this.hits * this.scoreValue,

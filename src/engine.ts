@@ -1,23 +1,27 @@
 import Food from "./food";
-import { CellType, ISettings } from "./interfaces";
-import Score from "./score";
+import { CellType, IController, IScore, ISettings } from "./interfaces";
+import Scorer from "./scorer";
 import Snake from "./snake";
 
+export interface IGameState {
+  playground: number[][];
+  state: string;
+  score: IScore;
+}
+
 export default class Engine {
-  private score: Score;
+  private scorer: Scorer;
   private snake: Snake;
   private food: Food;
-  private playground;
-  private dx;
-  private dy;
-  private state;
-  private gameState;
-  private interval;
-  private ctrl;
-  private tickCb: (fn: () => void) => void;
+  private playground: number[][];
+  private dx: number;
+  private dy: number;
+  private gameState: IGameState;
+  private interval: number;
+  private ctrl: IController;
+  private tickCb: (state: IGameState) => void;
 
   constructor(private settings: ISettings) {
-    this.score = new Score();
     this.snake = new Snake({x: 0, y: 0});
     this.food = new Food(settings);
     this.food.placeFood(this.snake.snake);
@@ -27,9 +31,8 @@ export default class Engine {
 
     this.gameState = {
       playground: this.playground,
-      state: {
-        game: "notStarted",
-      },
+      state: "notStarted",
+      score: this.scorer.getScore(),
     };
   }
 
@@ -43,7 +46,7 @@ export default class Engine {
   }
 
   public start() {
-    if (this.state !== "started") {
+    if (this.gameState.state !== "started") {
       this.interval = setInterval(this.tick.bind(this), this.settings.speed);
     }
   }
@@ -78,20 +81,21 @@ export default class Engine {
     if (this.snake.isHeadHere(this.food.position.x, this.food.position.y)) {
       this.snake.eat(this.dx, this.dy);
       this.food.placeFood(this.snake.snake);
-      this.score.hit();
+      this.scorer.hit();
     } else {
       this.snake.move(this.dx, this.dy);
     }
 
     if (this.isGameOver()) {
-      this.score.reset();
-      this.gameState.state.game = "over";
+      this.scorer.reset();
+      this.gameState.state = "over";
       clearInterval(this.interval);
     } else {
       this.gameState.playground = this.generatePlayground();
     }
 
-    this.gameState.state.score = this.score.getScore();
+    this.gameState.score = this.scorer.getScore();
+
     this.tickCb(this.gameState);
   }
 

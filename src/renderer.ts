@@ -1,4 +1,5 @@
-import { CellType } from "./interfaces";
+import { IGameState } from "./engine";
+import { CellType, IScore } from "./interfaces";
 
 export default class Renderer {
   private static readonly CELL_CLASS_NAME = "pg-cell";
@@ -9,9 +10,9 @@ export default class Renderer {
     [CellType.Food]: "food",
     [CellType.Empty]: "empty",
   };
-  private container;
-  private table;
-  private tbody;
+  private container: HTMLElement;
+  private table: HTMLTableElement;
+  private tbody: HTMLTableSectionElement;
   private highScore;
   private score;
   private scoreContainer;
@@ -22,7 +23,7 @@ export default class Renderer {
     this._init(sizes.width, sizes.height);
   }
 
-  public render({ playground, state }) {
+  public render({ playground, state, score }: IGameState) {
     const self = this;
 
     playground.forEach((row, x) => {
@@ -33,7 +34,7 @@ export default class Renderer {
       });
     });
 
-    this._renderScore(state.score);
+    this._renderScore(score);
   }
 
   private _getClassName(type) {
@@ -61,7 +62,7 @@ export default class Renderer {
     this.container.appendChild(this.scoreContainer);
   }
 
-  private _renderScore({ score, highScore }) {
+  private _renderScore({ score, highScore }: IScore) {
     this.highScore.innerText = highScore;
     this.score.innerText = score;
   }

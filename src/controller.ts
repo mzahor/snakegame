@@ -1,9 +1,4 @@
-export interface IController {
-  onLeft: (cb: () => void) => void;
-  onRight: (cb: () => void) => void;
-  onUp: (cb: () => void) => void;
-  onDown: (cb: () => void) => void;
-}
+import { IController } from "./interfaces";
 
 export default class Controller implements IController {
   private upCb;
