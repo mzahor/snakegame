@@ -1,6 +1,7 @@
 Snake game
 ==========
-[](https://travis-ci.org/#)
+![](https://travis-ci.org/mzahor/snakegame.svg?branch=master)
+
 Created with my friend just for fun.
 Currently I use it to try TypeScript in action.
 
