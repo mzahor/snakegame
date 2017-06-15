@@ -25,6 +25,7 @@ export default class Scorer {
   }
 
   public reset() {
+    this.hits = 0;
     this.highScore = Math.max(this.highScore, this.score);
   }
 }
