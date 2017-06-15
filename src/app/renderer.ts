@@ -77,8 +77,12 @@ export default class Renderer implements IRenderer {
   }
 
   private _renderScore({ score, highScore }: IScore) {
-    this.highScore.innerText = highScore;
-    this.score.innerText = score;
+    this.highScore.innerText = `
+      High-Score: ${highScore}
+    `;
+    this.score.innerText = `
+      Score: ${score}
+    `;
   }
 
   private _createRows(width, height) {

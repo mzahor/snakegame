@@ -8,18 +8,19 @@ export default class Scorer {
 
   constructor() {
     this.hits = 0;
-    this.highScore = 0;
+    this.score = this.highScore = 0;
     this.scoreValue = 100;
   }
 
   public hit() {
     this.hits++;
+    this.score = this.hits * this.scoreValue;
   }
 
   public getScore(): IScore {
     return {
       highScore: Math.max(this.highScore, this.score),
-      score: this.hits * this.scoreValue,
+      score: this.score,
     };
   }
 
