@@ -13,11 +13,21 @@ export default class Food {
 
   public placeFood(snake: IPoint[]) {
     const coords = this._getRandomCords();
-    if (snake.some((part) => part.x === coords.x && part.y === coords.y)) {
+    if (this._isOutOfBounds(coords) ||
+      snake.some((part) => part.x === coords.x && part.y === coords.y)) {
       this.placeFood(snake);
     } else {
       this.position = coords;
     }
+  }
+
+  private _isOutOfBounds(coords) {
+    return (
+        coords.x < 0 ||
+        coords.y < 0 ||
+        coords.x >= this.settings.size.height ||
+        coords.y >= this.settings.size.width
+    );
   }
 
   private _getRandomCords() {
