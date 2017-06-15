@@ -9,11 +9,13 @@ const utils = {
   },
   createEl: ({tag, style, className, target}: IElConfig) => {
     const el = document.createElement(tag);
-    el.className = className;
     for (const prop in style) {
       if (style[prop]) {
         el.style[prop] = style[prop];
       }
+    }
+    if (className) {
+      el.className = className;
     }
     if (target) {
       target.appendChild(el);
