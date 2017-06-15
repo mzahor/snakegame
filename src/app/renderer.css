@@ -1,7 +1,12 @@
+#app {
+  text-align: center;
+}
+
 .playground {
   border: 1px solid #1b9e3d;
   table-layout: fixed;
-  border-spacing: 0
+  border-spacing: 0;
+  margin: 0 auto;
 }
 
 .playground .pg-cell {
