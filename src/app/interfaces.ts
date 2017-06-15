@@ -42,3 +42,10 @@ export enum CellType {
     Food,
     Empty,
 }
+
+export interface IElConfig {
+    tag: string;
+    style?: object;
+    className?: string;
+    target?: HTMLElement;
+}

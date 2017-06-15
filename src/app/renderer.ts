@@ -1,6 +1,7 @@
 import { IGameState } from "./interfaces";
 import { CellType, IRenderer, IScore } from "./interfaces";
 import "./renderer.css";
+import utils from "./utils";
 
 export default class Renderer implements IRenderer {
   private static readonly CELL_CLASS_NAME = "pg-cell";
@@ -45,22 +46,34 @@ export default class Renderer implements IRenderer {
   }
 
   private _init(width, height) {
-    this.table = document.createElement("table");
-    this.tbody = document.createElement("tbody");
-    this.highScore = document.createElement("h1");
-    this.score = document.createElement("h2");
-    this.scoreContainer = document.createElement("div");
-    this.scoreContainer.className = "score";
-    this.table.className = "playground";
-    this.tbody.className = "";
+    this.table = utils.createEl({
+      tag: "table",
+      target: this.container,
+      className: "playground",
+    }) as HTMLTableElement;
+
+    this.tbody = utils.createEl({
+      tag: "tbody",
+      target: this.table,
+    }) as HTMLTableSectionElement;
+
+    this.scoreContainer = utils.createEl({
+      tag: "div",
+      target: this.container,
+      className: "score",
+    });
+
+    this.highScore = utils.createEl({
+      tag: "h1",
+      target: this.scoreContainer,
+    });
+
+    this.score = utils.createEl({
+      tag: "h2",
+      target: this.scoreContainer,
+    });
 
     this._createRows(width, height);
-
-    this.table.appendChild(this.tbody);
-    this.container.appendChild(this.table);
-    this.scoreContainer.appendChild(this.highScore);
-    this.scoreContainer.appendChild(this.score);
-    this.container.appendChild(this.scoreContainer);
   }
 
   private _renderScore({ score, highScore }: IScore) {
