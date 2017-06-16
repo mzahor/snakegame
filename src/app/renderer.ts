@@ -18,6 +18,7 @@ export default class Renderer implements IRenderer {
   private highScore;
   private score;
   private scoreContainer;
+  private gameStateContainer;
 
   constructor(sizes) {
     this.container = document.getElementById("app");
@@ -37,6 +38,7 @@ export default class Renderer implements IRenderer {
     });
 
     this._renderScore(score);
+    this._renderState(state);
   }
 
   private _getClassName(type) {
@@ -46,6 +48,12 @@ export default class Renderer implements IRenderer {
   }
 
   private _init(width, height) {
+    this.gameStateContainer = utils.createEl({
+      tag: "div",
+      target: this.container,
+      className: "game-state",
+    });
+
     this.table = utils.createEl({
       tag: "table",
       target: this.container,
@@ -77,11 +85,17 @@ export default class Renderer implements IRenderer {
   }
 
   private _renderScore({ score, highScore }: IScore) {
-    this.highScore.innerText = `
+    this.highScore.innerHTML = `
       High-Score: ${highScore}
     `;
-    this.score.innerText = `
+    this.score.innerHTML = `
       Score: ${score}
+    `;
+  }
+
+  private _renderState(state) {
+    this.gameStateContainer.innerHTML = `
+      <h1>${state}</h1>
     `;
   }
 
