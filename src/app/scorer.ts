@@ -8,8 +8,9 @@ export default class Scorer {
 
   constructor() {
     this.hits = 0;
-    this.score = this.highScore = 0;
+    this.score = 0;
     this.scoreValue = 100;
+    this.highScore = +localStorage.getItem("high-score") || 0;
   }
 
   public hit() {
@@ -27,5 +28,6 @@ export default class Scorer {
   public reset() {
     this.hits = 0;
     this.highScore = Math.max(this.highScore, this.score);
+    localStorage.setItem("high-score", this.highScore.toString());
   }
 }

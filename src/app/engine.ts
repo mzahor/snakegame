@@ -22,6 +22,7 @@ export default class Engine {
   private tickHandle: number;
   private ctrl: IController;
   private tickCb: (state: IGameState) => void;
+  private onReset: () => void;
 
   constructor(private settings: ISettings) {
     this.snake = new Snake({ x: 0, y: 0 });
@@ -36,6 +37,7 @@ export default class Engine {
       playground: this.playground,
       state: "notStarted",
       score: this.scorer.getScore(),
+      onReset: this.reset.bind(this),
     };
   }
 
@@ -56,6 +58,21 @@ export default class Engine {
     if (this.gameState.state !== "started") {
       this.tickHandle = setInterval(this.tick.bind(this), this.settings.speed);
     }
+  }
+
+  private reset() {
+    this.snake = new Snake({ x: 0, y: 0 });
+    this.food.placeFood(this.snake.snake);
+    this.playground = this.generatePlayground();
+    this.scorer.reset();
+    this.dx = 0;
+    this.dy = 0;
+
+    this.gameState.score = this.scorer.getScore();
+    this.gameState.playground = this.playground;
+    this.gameState.state = "notStarted";
+
+    this.start();
   }
 
   private left() {

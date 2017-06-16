@@ -26,7 +26,7 @@ export default class Renderer implements IRenderer {
     this._init(sizes.width, sizes.height);
   }
 
-  public render({ playground, state, score }: IGameState) {
+  public render({ playground, state, score, onReset }: IGameState) {
     const self = this;
 
     playground.forEach((row, x) => {
@@ -39,6 +39,10 @@ export default class Renderer implements IRenderer {
 
     this._renderScore(score);
     this._renderState(state);
+
+    if (state === "over") {
+      this._renderResetButton(onReset);
+    }
   }
 
   private _getClassName(type) {
@@ -94,9 +98,27 @@ export default class Renderer implements IRenderer {
   }
 
   private _renderState(state) {
+    switch (state) {
+      case "over":
+        state = "Game Over";
+        break;
+      case "notStarted":
+        state = "Use Arrow Keys";
+        break;
+    }
     this.gameStateContainer.innerHTML = `
       <h1>${state}</h1>
     `;
+  }
+
+  private _renderResetButton(onReset) {
+    const button = utils.createEl({
+      tag: "button",
+      className: "reset-button",
+      target: this.gameStateContainer,
+    });
+    button.innerText = "Restart";
+    button.onclick = onReset;
   }
 
   private _createRows(width, height) {

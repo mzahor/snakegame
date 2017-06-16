@@ -22,6 +22,7 @@ export interface IGameState {
   playground: number[][];
   state: "notStarted" | "started" | "over";
   score: IScore;
+  onReset: () => void;
 }
 
 export interface IController {
