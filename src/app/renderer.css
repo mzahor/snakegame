@@ -52,7 +52,7 @@ body {
   table-layout: fixed;
   border-spacing: 0;
   opacity: 1;
-  transition: all .1s ease-in-out;
+  transition: all .5s ease-in-out;
 }
 
 .playground.game-over {
