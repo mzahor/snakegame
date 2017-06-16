@@ -1,5 +1,10 @@
+body {
+  margin: 0;
+}
+
 #app {
-  /*text-align: center;*/
+  /*background-color: rgba(0, 145, 171, 0.1);*/
+  padding: 25px 0;
 }
 
 .playground,
@@ -31,18 +36,14 @@
   margin: 0;
 }
 
-.playground .pg-cell.snake {
-  background-color: #3ac;
-}
-
 .playground .pg-cell.body {
-  background-color: #000;
+  background-color: #cc4949;
 }
 
 .playground .pg-cell.head {
-  background-color: blue;
+  background-color: #ff7171;
 }
 
 .playground .pg-cell.food {
-  background-color: red;
+  background-color: #ffa700;
 }
