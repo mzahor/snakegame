@@ -7,6 +7,14 @@ body {
   padding: 25px 0;
 }
 
+.reset-button {
+  background-color: #fff;
+  border: 1px solid;
+  cursor: pointer;
+  box-shadow: 0 0 1em deepskyblue;
+  font-size: 17px;
+}
+
 .playground,
 .game-state,
 .score {
@@ -34,6 +42,7 @@ body {
   word-wrap: break-word;
   padding: 0;
   margin: 0;
+  transition: all .1s ease-in-out;
 }
 
 .playground .pg-cell.body {
@@ -46,4 +55,5 @@ body {
 
 .playground .pg-cell.food {
   background-color: #ffa700;
+  transition: all .2s cubic-bezier(0.4, 0, 1, 1);
 }
