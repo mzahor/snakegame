@@ -42,6 +42,13 @@ export default class Renderer implements IRenderer {
 
     if (state === "over") {
       this._renderResetButton(onReset);
+      this.table.classList.add("game-over");
+      this.scoreContainer.classList.add("game-over");
+      this.gameStateContainer.classList.add("game-over");
+    } else {
+      this.table.classList.remove("game-over");
+      this.scoreContainer.classList.remove("game-over");
+      this.gameStateContainer.classList.remove("game-over");
     }
   }
 

@@ -3,7 +3,7 @@ body {
 }
 
 #app {
-  /*background-color: rgba(0, 145, 171, 0.1);*/
+  text-align: center;
   padding: 25px 0;
 }
 
@@ -26,12 +26,37 @@ body {
   text-align: center;
   vertical-align: top;
   width: 30%;
+  position: absolute;
+  transition: all .5s ease-in-out;
+  z-index: 1;
+}
+
+.game-state {
+  left: 0;
+}
+
+.game-state.game-over {
+  left: 25%;
+}
+
+.score {
+  right: 0;
+}
+
+.score.game-over {
+  right: 25%;
 }
 
 .playground {
   border: 1px solid #1b9e3d;
   table-layout: fixed;
   border-spacing: 0;
+  opacity: 1;
+  transition: all .1s ease-in-out;
+}
+
+.playground.game-over {
+  opacity: .2;
 }
 
 .playground .pg-cell {
