@@ -1,12 +1,24 @@
 #app {
+  /*text-align: center;*/
+}
+
+.playground,
+.game-state,
+.score {
+  display: inline-block;
+}
+
+.game-state,
+.score {
   text-align: center;
+  vertical-align: top;
+  width: 30%;
 }
 
 .playground {
   border: 1px solid #1b9e3d;
   table-layout: fixed;
   border-spacing: 0;
-  margin: 0 auto;
 }
 
 .playground .pg-cell {
